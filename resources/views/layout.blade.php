@@ -17,6 +17,7 @@
     </div>
 
 </body>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="{{asset('js/script.js')}}"></script>
 <script src="{{asset('js/jquery.min.js')}}" type="text.javascript"></script>
 <script src="https://kit.fontawesome.com/f372ce4aed.js"></script>

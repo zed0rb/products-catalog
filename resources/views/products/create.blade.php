@@ -4,7 +4,7 @@
 
 <h1>Sukurti nauja preke</h1>
 
-    <form method="post" action="/products">
+    <form method="post" action="/products" enctype="multipart/form-data">
         @csrf
 
         <table class="table table-bordered">
@@ -23,6 +23,10 @@
             <tr>
                 <td>Description</td>
                 <td><textarea  name="description" placeholder="description" class="form-control" required>{{old('name')}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="image" class="form-control" value="Upload image"></td>
             </tr>
             <tr>
                 <td colspan="2">

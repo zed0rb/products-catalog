@@ -14,9 +14,9 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-
-        return view('welcome', compact('products'));
+        $products = Product::latest()->paginate(8);
+        return view('welcome', compact('products'))
+            ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
 

@@ -9,11 +9,12 @@
         @foreach($products as $product)
             <div class="product">
                 <a href="/single-product/{{$product->id}}">
-                    <img src="https://ssl-product-images.www8-hp.com/digmedialib/prodimg/lowres/c05962448.png" alt="">
+                    <img src="{{ asset('images/'.$product->image) }}">
                     <div>
                         <h2>{{$product->name}}</h2>
+
                         <p>{{$product->SKU}}</p>
-                        <p>{{$product->price}}</p>
+                        <p>{{$product->price}}€</p>
                     </div>
 
                 </a>

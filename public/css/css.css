@@ -69,3 +69,11 @@ img {
     color: #5a6268;
     text-decoration: none;
 }
+
+.single-product p {
+    font-size: 30px;
+}
+
+td img {
+    width: 50px;
+}

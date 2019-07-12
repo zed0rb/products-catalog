@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 
+
 class ProductsController extends Controller
 {
     /**
@@ -36,14 +37,37 @@ class ProductsController extends Controller
      */
     public function store(Product $product)
     {
-        $product->create(
-            request()->validate([
-                'name'=> ['required', 'min:3', 'max:191'],
-                'SKU' => 'required',
-                'price' => 'required',
-                'description' => 'required'
+    dd('die');
+        $product->validate([
+                'name'        => ['required', 'min:3', 'max:191'],
+                'SKU'         => 'required',
+                'price'       => 'required',
+                'description' => 'required',
+                'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
-        ]));
+        ]);
+
+        $originalFileName = 'null';
+        if ($product->hasFile('image')){
+            $img = request()->file('image');
+
+            $originalFileName = $img->getClientOriginalName();
+            $img->move('images', $originalFileName);
+        }
+
+
+        $form_data = [
+            'name'        => $product->name,
+            'SKU'         => $product->SKU,
+            'price'       => $product->price,
+            'status'      => $product->status,
+            'description' => $product->description,
+            'image'       => $originalFileName
+        ];
+
+        $product->create($form_data);
+
+
 
         return redirect('/products');
     }
@@ -78,15 +102,43 @@ class ProductsController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Product $product)
+    public function update(Request $request, $id)
     {
-        $product->update(request([
-            'name',
-            'SKU',
-            'status',
-            'price',
-            'status',
-            'description']));
+        $request->validate([
+            'name'        => ['required', 'min:3', 'max:191'],
+            'SKU'         => 'required',
+            'price'       => 'required',
+            'description' => 'required',
+            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+
+        ]);
+
+        $product = Product::find($id);
+
+//        check if image is set and prepare data
+        if ($request->hasFile('image')){
+            $img = request()->file('image');
+
+            $originalFileName = $img->getClientOriginalName();
+            $img->move('images', $originalFileName);
+
+            $form_data = [
+                'name'        => $request->name,
+                'SKU'         => $request->SKU,
+                'price'       => $request->price,
+                'description' => $request->description,
+                'image'       => $originalFileName
+            ];
+        } else {
+            $form_data = [
+                'name'        =>  $request->name,
+                'SKU'         =>  $request->SKU,
+                'price'       =>  $request->price,
+                'description' =>  $request->description,
+            ];
+        }
+
+        $product->update($form_data);
 
         return redirect('/products');
     }

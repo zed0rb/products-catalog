@@ -17,8 +17,9 @@
                     <th>Select</th>
                     <th>Product name</th>
                     <th>Unique number</th>
-                    <th>price</th>
-                    <th>description</th>
+                    <th>Price in €</th>
+                    <th>Description</th>
+                    <th>Image</th>
                     <th>Edit / Delete</th>
                 </tr>
                 </thead>
@@ -28,8 +29,9 @@
                             <td><input type="checkbox" name="ids[]" class="selectbox" value="{{$product->id}}"></td>
                             <td>{{ $product->name }}</td>
                             <td>{{$product->SKU}}</td>
-                            <td>{{$product->price}}</td>
-                            <td>{{$product->description}}</td>
+                            <td>{{$product->price}}€</td>
+                            <td>{!! $product->description !!}</td>
+                            <td><img src="{{ asset('images/'.$product->image) }}"></td>
                             <td>
                                 <a href="/products/{{$product->id}}/edit" class='btn btn-warning btn-lg tableButton'><span><i class="fas fa-edit"></i></span></a>
                                 /

@@ -4,7 +4,7 @@
 
     <h1>Edit product</h1>
 
-    <form method="post" action="/products/{{$product->id}}">
+    <form method="post" action="/products/{{$product->id}}" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <table class="table table-bordered">
@@ -17,12 +17,16 @@
                 <td><input type="text" name="SKU" placeholder="unique number" class="form-control" value="{{$product->SKU}}" required></td>
             </tr>
             <tr>
-                <td>Price</td>
+                <td>Price in €</td>
                 <td><input type="number" step="0.01" name="price" placeholder="price" class="form-control" value="{{$product->price}}" required></td>
             </tr>
             <tr>
                 <td>Description</td>
                 <td><textarea  name="description" placeholder="description" class="form-control" required>{{$product->description}}</textarea></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><input type="file" name="image"></td>
             </tr>
             <tr>
                 <td colspan="2">
