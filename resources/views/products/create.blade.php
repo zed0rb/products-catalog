@@ -7,6 +7,7 @@
     <form method="post" action="/products" enctype="multipart/form-data">
         @csrf
 
+
         <table class="table table-bordered">
             <tr>
                 <td>Product name</td>
@@ -22,7 +23,7 @@
             </tr>
             <tr>
                 <td>Description</td>
-                <td><textarea  name="description" placeholder="description" class="form-control" required>{{old('name')}}</textarea></td>
+                <td><textarea  name="description"  class="form-control" value="{{old('description')}}" required></textarea></td>
             </tr>
             <tr>
                 <td>Image</td>
@@ -32,7 +33,6 @@
                 <td colspan="2">
                     <button type="submit" name="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Create new Records</button>
                     <a href="/products" class="btn btn-success"><i class="glyphicon glyphicon-backward"></i> Back</a>
-
                 </td>
             </tr>
         </table>

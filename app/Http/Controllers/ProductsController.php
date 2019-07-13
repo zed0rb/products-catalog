@@ -28,17 +28,18 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        return view('/products.create');
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
      */
-    public function store(Product $product)
+    public function store(Request $request, Product $product)
     {
-    dd('die');
-        $product->validate([
+
+        $request->validate([
                 'name'        => ['required', 'min:3', 'max:191'],
                 'SKU'         => 'required',
                 'price'       => 'required',
@@ -48,7 +49,7 @@ class ProductsController extends Controller
         ]);
 
         $originalFileName = 'null';
-        if ($product->hasFile('image')){
+        if ($request->hasFile('image')){
             $img = request()->file('image');
 
             $originalFileName = $img->getClientOriginalName();
@@ -57,11 +58,11 @@ class ProductsController extends Controller
 
 
         $form_data = [
-            'name'        => $product->name,
-            'SKU'         => $product->SKU,
-            'price'       => $product->price,
-            'status'      => $product->status,
-            'description' => $product->description,
+            'name'        => $request->name,
+            'SKU'         => $request->SKU,
+            'price'       => $request->price,
+            'status'      => $request->status,
+            'description' => $request->description,
             'image'       => $originalFileName
         ];
 
@@ -69,7 +70,7 @@ class ProductsController extends Controller
 
 
 
-        return redirect('/products');
+        return redirect('products');
     }
 
     /**

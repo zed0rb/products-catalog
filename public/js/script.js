@@ -1,11 +1,11 @@
 // tinycme WYSIWYG
 
-tinymce.init({
-    selector: 'textarea',
-    manu: {
-        view: {title: 'Edit', items: 'cut, copy, paste'}
-    }
-});
+// tinymce.init({
+//     selector: 'textarea',
+//     manu: {
+//         view: {title: 'Edit', items: 'cut, copy, paste'}
+//     }
+// });
 
 $(document).ready(function(){
 
