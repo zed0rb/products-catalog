@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
         $products = Product::all();
+
 
         return view('products.index', compact('products'));
     }
@@ -39,16 +41,17 @@ class ProductsController extends Controller
     public function store(Request $request, Product $product)
     {
 
+
         $request->validate([
                 'name'        => ['required', 'min:3', 'max:191'],
                 'SKU'         => 'required',
                 'price'       => 'required',
                 'description' => 'required',
-                'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                'image'       => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
 
-        $originalFileName = 'null';
+        $originalFileName = '';
         if ($request->hasFile('image')){
             $img = request()->file('image');
 
@@ -66,23 +69,14 @@ class ProductsController extends Controller
             'image'       => $originalFileName
         ];
 
+
         $product->create($form_data);
 
 
 
-        return redirect('products');
+        return redirect('products.index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return view('products.show', compact('product'));
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -93,7 +87,7 @@ class ProductsController extends Controller
     public function edit(Product $product)
     {
 
-        return view('/products.edit', compact('product'));
+        return view('products.edit', compact('product'));
     }
 
     /**
@@ -110,7 +104,7 @@ class ProductsController extends Controller
             'SKU'         => 'required',
             'price'       => 'required',
             'description' => 'required',
-            'image'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'image'       => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
 
@@ -128,7 +122,8 @@ class ProductsController extends Controller
                 'SKU'         => $request->SKU,
                 'price'       => $request->price,
                 'description' => $request->description,
-                'image'       => $originalFileName
+                'image'       => $originalFileName,
+                'status'      => $request->status
             ];
         } else {
             $form_data = [
@@ -136,8 +131,11 @@ class ProductsController extends Controller
                 'SKU'         =>  $request->SKU,
                 'price'       =>  $request->price,
                 'description' =>  $request->description,
+                'status'      =>  $request->status
             ];
         }
+
+
 
         $product->update($form_data);
 

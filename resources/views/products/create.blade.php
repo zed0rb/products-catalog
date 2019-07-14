@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -23,11 +23,20 @@
             </tr>
             <tr>
                 <td>Description</td>
-                <td><textarea  name="description"  class="form-control" value="{{old('description')}}" required></textarea></td>
+                <td><textarea  name="description"  novalidate>{{old('description')}}</textarea></td>
             </tr>
             <tr>
                 <td>Image</td>
                 <td><input type="file" name="image" class="form-control" value="Upload image"></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <select name="status" id="status">
+                        <option value="active">Active</option>
+                        <option value="disabled">Disabled</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">

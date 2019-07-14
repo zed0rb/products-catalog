@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -27,6 +27,15 @@
             <tr>
                 <td>Image</td>
                 <td><input type="file" name="image"></td>
+            </tr>
+            <tr>
+                <td>Status</td>
+                <td>
+                    <select name="status" id="status">
+                        <option value="active" @if ($product->status == "active") {{ 'selected' }} @endif>Active</option>
+                        <option value="disabled" @if ($product->status == "disabled") {{ 'selected' }} @endif>Disabled</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td colspan="2">

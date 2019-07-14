@@ -17,10 +17,10 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('SKU')->unique();
-            $table->string('status')->nullable(true);
+            $table->string('status');
             $table->decimal('price');
             $table->text('description');
-            $table->string('image')->nullable();
+            $table->string('image');
             $table->timestamps();
         });
     }

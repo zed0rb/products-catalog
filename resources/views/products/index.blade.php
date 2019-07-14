@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 
 @section('content')
 
@@ -20,6 +20,7 @@
                     <th>Price in €</th>
                     <th>Description</th>
                     <th>Image</th>
+                    <th>Status</th>
                     <th>Edit / Delete</th>
                 </tr>
                 </thead>
@@ -32,6 +33,7 @@
                             <td>{{$product->price}}€</td>
                             <td>{!! $product->description !!}</td>
                             <td><img src="{{ asset('images/'.$product->image) }}"></td>
+                            <td>{{$product->status}}</td>
                             <td>
                                 <a href="/products/{{$product->id}}/edit" class='btn btn-warning btn-lg tableButton'><span><i class="fas fa-edit"></i></span></a>
                                 /
