@@ -15,6 +15,15 @@
 
                         <p>{{$product->SKU}}</p>
                         <p>{{$product->price}}€</p>
+                        <p>
+                            @for($star = 1; $star <=5; $star++)
+                                @if($product->rating >= $star)
+                                    <span><i class="fas fa-star"></i></span>
+                                @else
+                                    <span><i class="far fa-star"></i></span>
+                                @endif
+                            @endfor
+                        </p>
                     </div>
 
                 </a>

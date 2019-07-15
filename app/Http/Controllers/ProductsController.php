@@ -74,7 +74,7 @@ class ProductsController extends Controller
 
 
 
-        return redirect('products.index');
+        return redirect('products');
     }
 
 

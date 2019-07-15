@@ -23,7 +23,7 @@
             </tr>
             <tr>
                 <td>Description</td>
-                <td><textarea  name="description"  novalidate>{{old('description')}}</textarea></td>
+                <td><textarea class="myTextEditor" name="description"  novalidate>{{old('description')}}</textarea></td>
             </tr>
             <tr>
                 <td>Image</td>

@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <td>Description</td>
-                <td><textarea  name="description" placeholder="description" class="form-control" required>{{$product->description}}</textarea></td>
+                <td><textarea  name="description" placeholder="description" class="form-control myTextEditor" required>{{$product->description}}</textarea></td>
             </tr>
             <tr>
                 <td>Image</td>
