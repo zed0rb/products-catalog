@@ -22,6 +22,10 @@
                 <td><input type="number" step="0.01" name="price" placeholder="price" class="form-control" value="{{old('price')}}" required></td>
             </tr>
             <tr>
+                <td>Individual discount (€)</td>
+                <td><input type="number" step="0.01" name="special_price" placeholder="individual discount" class="form-control" value="{{old('special_price')}}"></td>
+            </tr>
+            <tr>
                 <td>Description</td>
                 <td><textarea class="myTextEditor" name="description"  novalidate>{{old('description')}}</textarea></td>
             </tr>

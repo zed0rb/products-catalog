@@ -2,22 +2,50 @@
 
 @section('content')
 
-
     <div class="container">
         <h1>Products</h1>
-        <a href="/products/create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp; Add new product</a>
+
+{{--        section for global discount nad tax checkbox--}}
+
+{{--        <div class="flex-container">--}}
+{{--            <div class="flex-box">--}}
+{{--                <form method="post" action="/tax_edit">--}}
+{{--                    @csrf--}}
+{{--                    @method('Patch')--}}
+{{--                    <label for="onTax">--}}
+{{--                        Show product price with tax included--}}
+{{--                        <input type="checkbox" name="onTax" onchange="this.form.submit()">--}}
+{{--                    </label>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--            <div class="flex-box">--}}
+{{--                <form method="post" action="/global_discount_edit">--}}
+{{--                    @csrf--}}
+{{--                    @method('Patch')--}}
+{{--                    <label for="onTax">--}}
+{{--                        Setting global discount:--}}
+{{--                        <input type="number" name="global_discount" onchange=>--}}
+{{--                        %--}}
+{{--                        <button type="submit" class="btn">set</button>--}}
+{{--                    </label>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+
+
         <form method="post">
             @method('DELETE')
             @csrf
-            <button formaction="/deleteall" type="submit" class="btn btn-danger">Delete All Selected</button>
-
+            <a href="/products/create" class="btn btn-success"><i class="glyphicon glyphicon-plus"></i>&nbsp; Add new product</a>
+            <button formaction="/deleteall" type="submit" class="btn btn-danger">Delete All Selected</button><hr>
             <table id="datatable" class="table table-striped table-hover text-center" cellspacing="0" width="100%">
                 <thead class="thead-dark">
                 <tr>
                     <th>Select</th>
                     <th>Product name</th>
                     <th>Unique number</th>
-                    <th>Price in €</th>
+                    <th>Base rice in €</th>
+                    <th>Individual discount (€)</th>
                     <th>Description</th>
                     <th>Image</th>
                     <th>Status</th>
@@ -31,6 +59,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{$product->SKU}}</td>
                             <td>{{$product->price}}€</td>
+                            <td>{{$product->special_price}}€</td>
                             <td>{!! $product->description !!}</td>
                             <td><img src="{{ asset('images/'.$product->image) }}"></td>
                             <td>{{$product->status}}</td>

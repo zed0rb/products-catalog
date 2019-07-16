@@ -87,3 +87,7 @@ td img {
     margin: 20px;
     border: 2px solid #1b1e21;
 }
+
+.line_through{
+    text-decoration: line-through;
+}

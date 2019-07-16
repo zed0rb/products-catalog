@@ -8,7 +8,12 @@
             <img src="{{ asset('images/'.$product->image) }}">
             <h1>{{$product->name}}</h1>
             <p>{{$product->SKU}}</p>
-            <p>{{$product->price}}€</p>
+            @if($product->special_price || $product->globalDiscountValue())
+                <p class="line_through">{{number_format($product->priceWithTax(), 2)}}€</p>
+                <p>{{$product->finalPrice()}}€</p>
+            @else
+                <p>{{$product->finalPrice()}}€</p>
+            @endif
             <p>{!! $product->description !!}</p>
             <p>
                 @for($star = 1; $star <=5; $star++)

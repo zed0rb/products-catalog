@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 
 
+
 class LandingPageController extends Controller
 {
     /**
@@ -13,13 +14,9 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-
-        $products = Product::latest()->where('status', 'active')->paginate(2);
-
-
-
+        $products = Product::latest()->where('status', 'active')->paginate(8);
         return view('welcome', compact('products'))
-            ->with('i', (request()->input('page', 1) - 1) * 2);
+            ->with('i', (request()->input('page', 1) - 1) * 8);
     }
 
 

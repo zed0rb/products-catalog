@@ -19,6 +19,8 @@ class CreateProductsTable extends Migration
             $table->string('SKU')->unique();
             $table->string('status');
             $table->decimal('price');
+            $table->decimal('special_price')->default(0)->nullable();
+            $table->unsignedInteger('rates_id');
             $table->text('description');
             $table->string('image');
             $table->timestamps();

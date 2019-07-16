@@ -20,7 +20,6 @@ class ProductsController extends Controller
     {
         $products = Product::all();
 
-
         return view('products.index', compact('products'));
     }
 
@@ -36,47 +35,41 @@ class ProductsController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     *
+     * @param Product $product
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function store(Request $request, Product $product)
+    public function store(Product $product)
     {
-
-
-        $request->validate([
-                'name'        => ['required', 'min:3', 'max:191'],
+        request()->validate([
+                'name'        => 'required|min:3|max:191',
                 'SKU'         => 'required',
                 'price'       => 'required',
                 'description' => 'required',
                 'image'       => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048'
-
         ]);
 
         $originalFileName = '';
-        if ($request->hasFile('image')){
+        if (request()->hasFile('image')){
             $img = request()->file('image');
 
             $originalFileName = $img->getClientOriginalName();
             $img->move('images', $originalFileName);
         }
 
-
         $form_data = [
-            'name'        => $request->name,
-            'SKU'         => $request->SKU,
-            'price'       => $request->price,
-            'status'      => $request->status,
-            'description' => $request->description,
-            'image'       => $originalFileName
+            'name'        => request('name'),
+            'SKU'         => request('SKU'),
+            'price'       => request('price'),
+            'description' => request('description'),
+            'image'       => $originalFileName,
+            'status'      => request('status'),
+            'special_price' => request('special_price'),
+            'rates_id'      => 1
         ];
-
-
         $product->create($form_data);
-
-
 
         return redirect('products');
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -86,20 +79,18 @@ class ProductsController extends Controller
      */
     public function edit(Product $product)
     {
-
         return view('products.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param Product $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Product $product)
     {
-        $request->validate([
+        request()->validate([
             'name'        => ['required', 'min:3', 'max:191'],
             'SKU'         => 'required',
             'price'       => 'required',
@@ -108,35 +99,32 @@ class ProductsController extends Controller
 
         ]);
 
-        $product = Product::find($id);
-
 //        check if image is set and prepare data
-        if ($request->hasFile('image')){
+        if (request()->hasFile('image')){
             $img = request()->file('image');
 
             $originalFileName = $img->getClientOriginalName();
             $img->move('images', $originalFileName);
 
             $form_data = [
-                'name'        => $request->name,
-                'SKU'         => $request->SKU,
-                'price'       => $request->price,
-                'description' => $request->description,
+                'name'        => request('name'),
+                'SKU'         => request('SKU'),
+                'price'       => request('price'),
+                'description' => request('description'),
                 'image'       => $originalFileName,
-                'status'      => $request->status
+                'status'      => request('status'),
+                'special_price' => request('special_price')
             ];
         } else {
             $form_data = [
-                'name'        =>  $request->name,
-                'SKU'         =>  $request->SKU,
-                'price'       =>  $request->price,
-                'description' =>  $request->description,
-                'status'      =>  $request->status
+                'name'        => request('name'),
+                'SKU'         => request('SKU'),
+                'price'       => request('price'),
+                'description' => request('description'),
+                'status'      => request('status'),
+                'special_price' => request('special_price')
             ];
         }
-
-
-
         $product->update($form_data);
 
         return redirect('/products');
@@ -145,12 +133,13 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param \App\Product $product
      *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {
-
         $product->delete();
 
         return redirect('/products');

@@ -26,3 +26,8 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::post('/single-product/{product}/review', 'ProductReviewController@store');
 
+//routes for global discount and tax
+//
+//Route::patch('/tax_edit', 'RatesController@updateTax');
+//Route::patch('/global_discount_edit', 'RatesController@updateDiscount');
+//

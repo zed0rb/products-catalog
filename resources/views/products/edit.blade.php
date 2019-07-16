@@ -21,6 +21,10 @@
                 <td><input type="number" step="0.01" name="price" placeholder="price" class="form-control" value="{{$product->price}}" required></td>
             </tr>
             <tr>
+                <td>Individual discount (€)</td>
+                <td><input type="number" step="0.01" name="special_price" placeholder="individual discount" class="form-control" value="{{$product->special_price}}"></td>
+            </tr>
+            <tr>
                 <td>Description</td>
                 <td><textarea  name="description" placeholder="description" class="form-control myTextEditor" required>{{$product->description}}</textarea></td>
             </tr>
