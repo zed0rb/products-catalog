@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Mews\Purifier\Facades\Purifier;
 
 
 class ProductsController extends Controller
@@ -60,7 +60,7 @@ class ProductsController extends Controller
             'name'        => request('name'),
             'SKU'         => request('SKU'),
             'price'       => request('price'),
-            'description' => request('description'),
+            'description' => Purifier::clean(request('description')),
             'image'       => $originalFileName,
             'status'      => request('status'),
             'special_price' => request('special_price'),
@@ -110,7 +110,7 @@ class ProductsController extends Controller
                 'name'        => request('name'),
                 'SKU'         => request('SKU'),
                 'price'       => request('price'),
-                'description' => request('description'),
+                'description' => Purifier::clean(request('description')),
                 'image'       => $originalFileName,
                 'status'      => request('status'),
                 'special_price' => request('special_price')
@@ -120,7 +120,7 @@ class ProductsController extends Controller
                 'name'        => request('name'),
                 'SKU'         => request('SKU'),
                 'price'       => request('price'),
-                'description' => request('description'),
+                'description' => Purifier::clean(request('description')),
                 'status'      => request('status'),
                 'special_price' => request('special_price')
             ];

@@ -1,8 +1,8 @@
 // tinycme WYSIWYG
 
 tinymce.init({
-    mode : "specific_textareas",
-    editor_selector : "myTextEditor",
+    selector: "textarea",
+
 });
 
 $(document).ready(function(){

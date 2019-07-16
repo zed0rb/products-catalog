@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
-
+use Mews\Purifier\Facades\Purifier;
 
 
 class ProductReviewController extends Controller
@@ -11,13 +11,19 @@ class ProductReviewController extends Controller
 
     public function store(Product $product)
     {
-        $attributes = request()->validate([
+         request()->validate([
             'rating'        => 'required',
             'headline'      => 'min:3',
             'description'   => 'min:10'
         ]);
 
-        $product->addReview($attributes);
+         $form_data = [
+             'rating' => request('rating'),
+             'headline' => request('headline'),
+             'description' => Purifier::clean(request('description'))
+         ];
+
+        $product->addReview($form_data);
 
         return back();
     }
